@@ -1,0 +1,153 @@
+<div class="modal-header">
+    <h4 class="modal-title" id="defModalHead">Channel Details</h4>
+</div>
+<div class="modal-body">
+
+    <div class="page-content-wrap">
+       <div class="modal-body" style="overflow: auto;">
+				<div class="row">
+					<div class="col-sm-12 col-md-12 col-lg-12">
+						<div class="col-sm-12">
+							<div>
+								<div ng-show="getChannelDetails.length == 0">
+									<p>No records found</p>
+								</div>
+								<table class="table table-stripped custom-table" ng-show="getChannelDetails.length > 0">
+									<thead>
+									    <th>Attribute</th>
+										<th>Channels</th>
+										<th>Language</th>
+										<th>Value</th>
+
+									</thead>
+				                     <tbody>
+										<tr ng-repeat="channeldata in getChannelDetails track by $index">
+										<td >{{channeldata.attribute}}</td>
+										<td >
+										<span ng-repeat="channels in channeldata.channel">{{channels.key || channels}}<span ng-if="!$last">, </span></span>
+										</td>
+										<td >{{channeldata.language}} </td>
+										<td >{{channeldata.value}}</td>
+										<!-- <td >{{classdata.classificationId}}</td> -->
+										</tr>
+									</tbody>
+									<tfoot ng-if="!showPagination">
+										<td colspan="6">
+											<div class="pagination pull-right">
+												<ul>
+													<li ng-class="{disabled: currentPage == 0}">
+														<a href ng-click="prevPage()">« Prev</a>
+													</li>
+													<li ng-repeat="n in range(groupItems.length)" ng-class="{active: n == currentPage}"ng-click="setPage()">
+													<a href ng-show="n >= min && n < max" ng-bind="n + 1">1</a>
+													</li>
+													<li ng-class="{disabled: currentPage == groupItems.length - 1}">
+														<a href ng-click="nextPage()">Next »</a>
+													</li>
+												</ul>
+											</div>
+										</td>
+									</tfoot>
+							    </table>
+							</div>		
+						</div>
+					</div>
+				</div>
+				<div class="row" ng-show="showChannelField">
+					<div class="form-group">
+								
+                                <label class="col-sm-3 control-label">Channel Id </label>
+                                <div class="col-sm-5">
+                                    <input type="text" class="form-control" name="mf" ng-model="channeldata.channelId" ng-minlength="0" ng-maxlength="50" ng-pattern="/^[a-zA-Z0-9_-]+$/">
+                                    <span class="error" ng-show="masterdata.mf.$invalid">Invalid:
+                                    <span ng-show="masterdata.mf.$error.minlength">Manufacturer  should be minimum of 0 characters</span>
+                                    <span ng-show="masterdata.mf.$error.maxlength">Manufacturer  should be maximum of 50 characters</span>
+                                    <span ng-show="masterdata.mf.$error.pattern">Manufacturer  won't allow special characters</span>
+                                    </span>
+                                </div>
+                                
+
+                    </div>
+
+					<div class="form-group">
+
+                                <label class="col-sm-3 control-label">Attribute Id </label>
+                                <div class="col-sm-5">
+                                    <input type="text" class="form-control" name="mf" ng-model="channeldata.attribute" ng-minlength="0" ng-maxlength="50" ng-pattern="/^[a-zA-Z0-9_-]+$/" ng-disabled="true">
+                                    <span class="error" ng-show="masterdata.mf.$invalid">Invalid:
+                                    <span ng-show="masterdata.mf.$error.minlength">Manufacturer  should be minimum of 0 characters</span>
+                                    <span ng-show="masterdata.mf.$error.maxlength">Manufacturer  should be maximum of 50 characters</span>
+                                    <span ng-show="masterdata.mf.$error.pattern">Manufacturer  won't allow special characters</span>
+                                    </span>
+                                </div>
+                                <div class="col-sm-1">
+                        			<span class="ng-scope"> 
+                                        <button class="btn btn-primary btn-xs" ng-click="searchAttributes('lg')">
+                                            <span class="glyphicon glyphicon-search"></span>
+                        				</button>
+                        			</span>
+                    			</div>
+
+                    </div>
+                    <div class="form-group">
+                                <label class="col-sm-3 control-label">channel </label>
+                                <div class="col-sm-5" >
+                                	<div class="col-sm-12 padding-l-r-zero" ng-class="{'margin-bottom15':!$last}" ng-repeat="channelsinfo in channeldata.channel track by $index">
+                        				
+	                                    <input type="text" class="form-control"  name="mf" ng-model="channelsinfo.key" >
+                        				
+	                                    
+                                	</div>
+                                </div>
+                                <div class="col-sm-2 ">
+                                	<button type="button" class="btn btn-primary btn-xs" data-dismiss="modal" ng-click="addChannelName()">
+                                		<span class="glyphicon glyphicon-plus"></span>
+                                	</button>
+                                </div>
+
+                    </div>
+                    <div class="form-group">
+                                <label class="col-sm-3 control-label">language </label>
+                                <div class="col-sm-5">
+                                	 <select name="language" class="form-control m-b" ng-model="channeldata.language">
+			                            <option value="de">de</option>
+			                            <option value="en">en</option>
+			                            <option value="es">es</option>
+			                            <option value="fr">fr</option>
+			                            <option value="jp">jp</option>
+			                        </select>
+                                    
+                                </div>
+
+                    </div>
+                    <div class="form-group">
+                                <label class="col-sm-3 control-label">Value </label>
+                                <div class="col-sm-5">
+                                    <input type="text" class="form-control" name="mf" ng-model="channeldata.value" ng-minlength="0" ng-maxlength="50" ng-pattern="/^[a-zA-Z0-9_-]+$/">
+                                    <span class="error" ng-show="masterdata.mf.$invalid">Invalid:
+                                    <span ng-show="masterdata.mf.$error.minlength">Manufacturer  should be minimum of 0 characters</span>
+                                    <span ng-show="masterdata.mf.$error.maxlength">Manufacturer  should be maximum of 50 characters</span>
+                                    <span ng-show="masterdata.mf.$error.pattern">Manufacturer  won't allow special characters</span>
+                                    </span>
+                                </div>
+
+                    </div>
+                    <div class="form-group">
+                    	<div class="col-sm-offset-3">
+                    		<div class="col-sm-1">
+                    			<button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="addChannelToList()">Add</button>
+                    		</div>
+                    		
+                    	</div>
+                        
+
+                    </div>
+				</div>	
+			</div>
+    </div>
+</div>
+<div class="modal-footer">
+	 <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="addChannel()">Add more Channel</button>
+	 <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="ok()">Ok</button>
+    <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="cancel()">Cancel</button>
+</div>
