@@ -115,5 +115,6 @@ var deleteEmptyArrayHelper = function(data) {
             originalData[req] = undefined;
         }        
     }
+    
     return originalData;
 };
