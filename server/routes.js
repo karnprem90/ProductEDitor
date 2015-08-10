@@ -20,7 +20,7 @@ var getAllRoutes = [
     ];
 
     for(var i=0; i<ModuleRoute.endpoint.length; i++){
-       getAllRoutes.push(ModuleRoute.endpoint[i]);  
+       getAllRoutes.push(ModuleRoute.endpoint[i]) ;  
     }
    
 // API Server Endpoints
